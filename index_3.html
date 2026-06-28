@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carol Zurita — Partnerships & Business Development Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEFEA;
+    --paper-raised:#F4F5F1;
+    --line:#D2D5CB;
+    --ink:#18242E;
+    --ink-soft:#54626B;
+    --ink-faint:#8A938E;
+    --stamp:#7A2E2E;
+    --stamp-soft:rgba(122,46,46,0.07);
+    --gold:#8E6E1F;
+    --gold-soft:rgba(142,110,31,0.10);
+    --max:1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--stamp);}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+
+  /* eyebrow / small caps labels */
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+
+  /* MASTHEAD */
+  .masthead{
+    padding:56px 0 28px;
+    border-bottom:1px solid var(--line);
+  }
+  .masthead .wrap{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:18px;}
+  .name{
+    font-family:'Source Serif 4',serif;
+    font-weight:700;
+    font-size:clamp(34px,5vw,52px);
+    letter-spacing:-0.01em;
+    margin:6px 0 4px;
+  }
+  .role-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+  .contact-block{
+    text-align:right;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    line-height:1.7;
+  }
+  .contact-block a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);}
+
+  /* TICKER */
+  .ticker-band{
+    background:var(--ink);
+    color:var(--paper);
+    overflow:hidden;
+    white-space:nowrap;
+    border-bottom:1px solid var(--line);
+  }
+  .ticker-track{
+    display:inline-flex;
+    animation:scroll 32s linear infinite;
+    padding:13px 0;
+  }
+  .ticker-track span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:0.04em;
+    padding:0 26px;
+    white-space:nowrap;
+  }
+  .ticker-track span b{color:#D9B65A;font-weight:600;}
+  @keyframes scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none;}
+  }
+
+  /* HERO TICKET */
+  .hero{padding:64px 0 40px;}
+  .hero-ticket{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:0;
+    display:flex;
+    position:relative;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .hero-ticket::before{
+    content:"";
+    position:absolute;
+    left:128px;
+    top:0;bottom:0;
+    width:0;
+    border-left:1px dashed var(--line);
+  }
+  .ticket-stub{
+    width:128px;
+    flex-shrink:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:24px 8px;
+    background-image:radial-gradient(circle, var(--paper) 4px, transparent 4.5px);
+    background-size:100% 22px;
+    background-position:0 -11px;
+  }
+  .ticket-stub .num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+    transform:rotate(-90deg);
+    white-space:nowrap;
+    letter-spacing:0.08em;
+  }
+  .ticket-body{padding:34px 38px;flex:1;}
+  .ticket-body p.lede{
+    font-family:'Source Serif 4',serif;
+    font-size:21px;
+    line-height:1.55;
+    margin:0 0 22px;
+    max-width:680px;
+  }
+  .ticket-body p.lede b{font-weight:700;}
+  .headline-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    border-top:1px solid var(--line);
+    padding-top:18px;
+  }
+  .stat .v{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:600;color:var(--ink);}
+  .stat .l{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-faint);margin-top:4px;}
+
+  /* SEAL — decade badge on the hero ticket */
+  .seal{
+    position:absolute;
+    top:-22px;
+    right:-22px;
+    width:108px;
+    height:108px;
+    z-index:2;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,0.08));
+  }
+  .seal svg{width:100%;height:100%;}
+  .seal .seal-spin{
+    animation:spin 38s linear infinite;
+    transform-origin:54px 54px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .seal .seal-spin{animation:none;}
+  }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+  @media (max-width:760px){
+    .seal{width:84px;height:84px;top:-16px;right:-12px;}
+  }
+
+  /* TIMELINE — passport style decade strip */
+  .timeline-scroll{
+    overflow-x:auto;
+    padding-bottom:6px;
+    margin:0 -28px;
+    padding-left:28px;
+    padding-right:28px;
+  }
+  .passport{
+    position:relative;
+    display:flex;
+    min-width:760px;
+    padding:46px 0 6px;
+  }
+  .passport-line{
+    position:absolute;
+    top:64px;
+    left:0;
+    right:0;
+    height:0;
+    border-top:1px dashed var(--line);
+    z-index:0;
+  }
+  .stop{
+    flex:1;
+    min-width:120px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    position:relative;
+    z-index:1;
+    text-align:center;
+    padding:0 6px;
+  }
+  .stop-mark{
+    width:13px;height:13px;border-radius:50%;
+    background:var(--paper-raised);
+    border:2px solid var(--ink);
+    margin-bottom:14px;
+    transition:transform .25s ease;
+  }
+  .stop.origin .stop-mark{border-color:var(--stamp);background:var(--stamp-soft);width:16px;height:16px;}
+  .stop:hover .stop-mark{transform:scale(1.3);}
+  .stop-year{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;color:var(--ink);letter-spacing:0.03em;}
+  .stop-role{font-family:'Source Serif 4',serif;font-weight:700;font-size:15px;margin:3px 0 1px;line-height:1.25;}
+  .stop-loc{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.04em;}
+  .timeline-note{
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    max-width:680px;
+    margin-top:6px;
+    line-height:1.6;
+  }
+
+  /* SECTION HEADERS */
+  section{padding:46px 0;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    border-bottom:1px solid var(--line);
+    padding-bottom:10px;
+    margin-bottom:30px;
+  }
+  .section-title{
+    font-family:'Source Serif 4',serif;
+    font-weight:700;
+    font-size:26px;
+  }
+
+  /* TRACK RECORD TICKETS */
+  .deal-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+  }
+  .deal{
+    border:1px solid var(--line);
+    background:var(--paper-raised);
+    padding:20px 22px 18px;
+    position:relative;
+    overflow:hidden;
+  }
+  .deal .stamp{
+    position:absolute;
+    top:14px;right:-26px;
+    background:transparent;
+    color:var(--stamp);
+    border:2px solid var(--stamp);
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:0.1em;
+    padding:3px 30px;
+    transform:rotate(8deg);
+    opacity:0.85;
+  }
+  .deal .counterparty{
+    font-family:'Source Serif 4',serif;
+    font-weight:700;
+    font-size:18px;
+    margin:0 0 2px;
+    padding-right:70px;
+  }
+  .deal .via{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--ink-faint);
+    margin-bottom:14px;
+  }
+  .deal .row{
+    display:flex;
+    justify-content:space-between;
+    font-size:13.5px;
+    padding:7px 0;
+    border-top:1px dashed var(--line);
+    gap:14px;
+  }
+  .deal .row:first-of-type{border-top:none;}
+  .deal .row .k{color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.04em;text-transform:uppercase;flex-shrink:0;padding-top:1px;}
+  .deal .row .v{text-align:right;font-weight:500;}
+  .deal .row .v.gold{color:var(--gold);font-family:'IBM Plex Mono',monospace;font-weight:600;}
+
+  /* OUTREACH FUNNEL */
+  .funnel{display:flex;flex-direction:column;gap:10px;max-width:760px;}
+  .funnel-row{display:grid;grid-template-columns:170px 1fr 110px;align-items:center;gap:16px;}
+  .funnel-label{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);}
+  .funnel-bar-track{background:var(--line);height:26px;position:relative;}
+  .funnel-bar{
+    height:100%;
+    background:var(--ink);
+    display:flex;
+    align-items:center;
+    color:var(--paper);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    padding-left:10px;
+  }
+  .funnel-bar.gold-fill{background:var(--gold);}
+  .funnel-value{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:14px;
+    font-weight:600;
+    text-align:right;
+  }
+  .funnel-note{
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    max-width:640px;
+    margin-top:18px;
+    line-height:1.6;
+  }
+  .tool-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:16px;
+  }
+  .tool-chip{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    border:1px solid var(--line);
+    padding:5px 10px;
+    color:var(--ink-soft);
+  }
+
+  /* CAPABILITIES LEDGER */
+  .ledger-table{
+    width:100%;
+    border-collapse:collapse;
+  }
+  .ledger-table tr{border-bottom:1px solid var(--line);}
+  .ledger-table tr:first-child{border-top:1px solid var(--line);}
+  .ledger-table td{padding:13px 6px;font-size:14px;vertical-align:top;}
+  .ledger-table td.cat{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    width:230px;
+    padding-top:14px;
+  }
+
+  /* FOOTER */
+  footer{
+    border-top:1px solid var(--line);
+    padding:34px 0 50px;
+  }
+  .footer-grid{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:20px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .footer-grid .col{line-height:1.8;}
+  .footer-grid .col span{color:var(--ink-faint);display:block;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease, transform .5s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--stamp);outline-offset:2px;}
+
+  @media (max-width:760px){
+    .masthead .wrap{flex-direction:column;align-items:flex-start;}
+    .contact-block{text-align:left;}
+    .headline-stats{grid-template-columns:repeat(2,1fr);}
+    .deal-grid{grid-template-columns:1fr;}
+    .hero-ticket{flex-direction:column;}
+    .ticket-stub{display:none;}
+    .hero-ticket::before{display:none;}
+    .funnel-row{grid-template-columns:1fr;text-align:left;}
+    .funnel-value{text-align:left;}
+    .ledger-table td.cat{width:140px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Partnership & Business Development Ledger</div>
+      <div class="name">Carol Zurita</div>
+      <div class="role-line">Partnerships · Outreach · Deal Origination — DeFi, Fintech & Web3</div>
+    </div>
+    <div class="contact-block">
+      Seattle, WA, US<br>
+      <a href="mailto:carol.zuritaa@outlook.com">carol.zuritaa@outlook.com</a><br>
+      +1 415 312 3762<br>
+      Fully fluent, English &amp; Spanish
+    </div>
+  </div>
+</header>
+
+<div class="ticker-band">
+  <div class="ticker-track" id="tickerTrack">
+    <!-- duplicated by JS for seamless loop -->
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="hero-ticket reveal">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 108 108">
+          <g class="seal-spin">
+            <circle cx="54" cy="54" r="50" fill="none" stroke="#7A2E2E" stroke-width="1.2" stroke-dasharray="2 3"/>
+            <path id="sealCircle" d="M 54,54 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" fill="none"/>
+            <text font-family="IBM Plex Mono, monospace" font-size="7.4" letter-spacing="2" fill="#7A2E2E">
+              <textPath href="#sealCircle" startOffset="0%">
+                · TEN YEARS IN THE FIELD · EST. 2016 · DEFI &amp; FINTECH · TEN YEARS IN THE FIELD ·
+              </textPath>
+            </text>
+          </g>
+          <circle cx="54" cy="54" r="24" fill="#F4F5F1" stroke="#7A2E2E" stroke-width="1.2"/>
+          <text x="54" y="51" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="600" fill="#7A2E2E">10</text>
+          <text x="54" y="64" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="6.2" letter-spacing="1" fill="#7A2E2E">YEARS</text>
+        </svg>
+      </div>
+      <div class="ticket-stub"><div class="num">LEDGER · NO. 001</div></div>
+      <div class="ticket-body">
+        <p class="lede">I source, negotiate, and close partnerships between crypto native projects and the institutions, platforms, and KOL networks that scale them. <b>Ten years</b> of full time work inside crypto and fintech marketing and business development, across APAC, the Middle East, and the US, with a personal interest in DeFi dating back to 2016.</p>
+        <div class="headline-stats">
+          <div class="stat"><div class="v">$1.8M</div><div class="l">Deal value closed</div></div>
+          <div class="stat"><div class="v">7%</div><div class="l">Cold outreach close rate</div></div>
+          <div class="stat"><div class="v">6+</div><div class="l">Institutional partners landed</div></div>
+          <div class="stat"><div class="v">4</div><div class="l">Regions operated in</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="decade">
+    <div class="section-head reveal">
+      <div class="section-title">A Decade in the Field</div>
+      <div class="eyebrow">2016 — Present · APAC / MENA / Americas</div>
+    </div>
+    <div class="timeline-scroll reveal">
+      <div class="passport">
+        <div class="passport-line"></div>
+
+        <div class="stop origin">
+          <div class="stop-mark"></div>
+          <div class="stop-year">2016</div>
+          <div class="stop-role">DeFi, personally</div>
+          <div class="stop-loc">Where the interest started</div>
+        </div>
+
+        <div class="stop">
+          <div class="stop-mark"></div>
+          <div class="stop-year">2020 to 2021</div>
+          <div class="stop-role">LATOKEN</div>
+          <div class="stop-loc">Singapore</div>
+        </div>
+
+        <div class="stop">
+          <div class="stop-mark"></div>
+          <div class="stop-year">2021 to 2022</div>
+          <div class="stop-role">Cabital &amp; Fandom Korea</div>
+          <div class="stop-loc">Singapore</div>
+        </div>
+
+        <div class="stop">
+          <div class="stop-mark"></div>
+          <div class="stop-year">2022</div>
+          <div class="stop-role">Bybit / Apex.Exchange</div>
+          <div class="stop-loc">Singapore</div>
+        </div>
+
+        <div class="stop">
+          <div class="stop-mark"></div>
+          <div class="stop-year">2022 to 2023</div>
+          <div class="stop-role">NUVO Technology</div>
+          <div class="stop-loc">Remote</div>
+        </div>
+
+        <div class="stop">
+          <div class="stop-mark"></div>
+          <div class="stop-year">2023 to 2024</div>
+          <div class="stop-role">DualMint</div>
+          <div class="stop-loc">Remote</div>
+        </div>
+
+        <div class="stop">
+          <div class="stop-mark"></div>
+          <div class="stop-year">2023 to Present</div>
+          <div class="stop-role">NXTGEN BIZ &amp; Co.</div>
+          <div class="stop-loc">Seattle, WA</div>
+        </div>
+
+      </div>
+    </div>
+    <p class="timeline-note">Same throughline across every stop: find the gap, build the relationship, close the deal. Ten years in, the regions and counterparties have changed, the instinct has not.</p>
+  </section>
+
+  <section id="track-record">
+    <div class="section-head reveal">
+      <div class="section-title">Track Record</div>
+      <div class="eyebrow">Closed Partnerships</div>
+    </div>
+    <div class="deal-grid">
+
+      <div class="deal reveal">
+        <div class="stamp">Closed</div>
+        <div class="counterparty">BNB Chain &amp; OpenSea</div>
+        <div class="via">via Fandom Studio Korea, 2021 to 2022</div>
+        <div class="row"><span class="k">Mechanism</span><span class="v">Self originated distribution partnership for a 22,000 piece NFT collection</span></div>
+        <div class="row"><span class="k">My role</span><span class="v">Identified the gap, negotiated, closed, coordinated 3 organizations</span></div>
+        <div class="row"><span class="k">Result</span><span class="v gold">Sellout in 24 hours, approx $1.8M</span></div>
+      </div>
+
+      <div class="deal reveal">
+        <div class="stamp">Closed</div>
+        <div class="counterparty">Coinstore</div>
+        <div class="via">via DualMint, 2023 to 2024</div>
+        <div class="row"><span class="k">Mechanism</span><span class="v">Event sponsorship partnership, TOKEN2049 Dubai</span></div>
+        <div class="row"><span class="k">My role</span><span class="v">Owned the partnership end to end, full activation delivery</span></div>
+        <div class="row"><span class="k">Result</span><span class="v gold">Activation delivered on time and on budget</span></div>
+      </div>
+
+      <div class="deal reveal">
+        <div class="stamp">Closed</div>
+        <div class="counterparty">CoinGecko &amp; Cointelegraph</div>
+        <div class="via">via Bybit / Apex.Exchange, 2022</div>
+        <div class="row"><span class="k">Mechanism</span><span class="v">Media and distribution partnership</span></div>
+        <div class="row"><span class="k">My role</span><span class="v">Negotiated and executed inside a tier one exchange</span></div>
+        <div class="row"><span class="k">Result</span><span class="v gold">+40% social reach, +20% web traffic</span></div>
+      </div>
+
+      <div class="deal reveal">
+        <div class="stamp">Closed</div>
+        <div class="counterparty">BCB Group</div>
+        <div class="via">via Cabital, 2021 to 2022</div>
+        <div class="row"><span class="k">Mechanism</span><span class="v">Co marketing and liquidity partner relationship</span></div>
+        <div class="row"><span class="k">My role</span><span class="v">Negotiated and managed the ongoing partnership</span></div>
+        <div class="row"><span class="k">Result</span><span class="v gold">Measurable platform growth</span></div>
+      </div>
+
+      <div class="deal reveal">
+        <div class="stamp">Closed</div>
+        <div class="counterparty">12 partner KOL network</div>
+        <div class="via">via NUVO Technology, 2022 to 2023</div>
+        <div class="row"><span class="k">Mechanism</span><span class="v">Influencer partnership program, 70% micro / 30% large accounts</span></div>
+        <div class="row"><span class="k">My role</span><span class="v">Sourced, negotiated, and tested conversion by tier</span></div>
+        <div class="row"><span class="k">Result</span><span class="v gold">8,000 followers at $1.87 CPA</span></div>
+      </div>
+
+      <div class="deal reveal">
+        <div class="stamp">Closed</div>
+        <div class="counterparty">Justin Sun, TRON</div>
+        <div class="via">via LATOKEN, 2020 to 2021</div>
+        <div class="row"><span class="k">Mechanism</span><span class="v">Exclusive executive media partnership, built from scratch</span></div>
+        <div class="row"><span class="k">My role</span><span class="v">Sourced and secured the relationship and the interview</span></div>
+        <div class="row"><span class="k">Result</span><span class="v gold">80,000 viewers, 45 minute exclusive</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="outreach">
+    <div class="section-head reveal">
+      <div class="section-title">Outreach Engine</div>
+      <div class="eyebrow">NXTGEN BIZ &amp; Co., 2023 to present</div>
+    </div>
+    <div class="funnel reveal">
+      <div class="funnel-row">
+        <div class="funnel-label">Sourced contacts</div>
+        <div class="funnel-bar-track"><div class="funnel-bar" style="width:100%;">5,000</div></div>
+        <div class="funnel-value">100%</div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">Engaged in outreach</div>
+        <div class="funnel-bar-track"><div class="funnel-bar" style="width:46%;">2,300 est.</div></div>
+        <div class="funnel-value">~46%</div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">Qualified conversations</div>
+        <div class="funnel-bar-track"><div class="funnel-bar" style="width:18%;">900 est.</div></div>
+        <div class="funnel-value">~18%</div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">Closed engagements</div>
+        <div class="funnel-bar-track"><div class="funnel-bar gold-fill" style="width:7%;">350</div></div>
+        <div class="funnel-value">7%</div>
+      </div>
+    </div>
+    <p class="funnel-note">Built and owned a cold outreach pipeline converting 7% of 5,000 contacts into paid client and partner engagements. Mid funnel figures are directional estimates, not audited stages, the 5,000 contacted and 7% closed figures are the verified anchors.</p>
+    <div class="tool-row">
+      <span class="tool-chip">Apollo</span>
+      <span class="tool-chip">Expandi</span>
+      <span class="tool-chip">LinkedIn Sales Navigator</span>
+      <span class="tool-chip">HubSpot</span>
+      <span class="tool-chip">Tableau</span>
+      <span class="tool-chip">RapidMiner</span>
+    </div>
+  </section>
+
+  <section id="capabilities">
+    <div class="section-head reveal">
+      <div class="section-title">Capabilities</div>
+      <div class="eyebrow">Ledger of Skills</div>
+    </div>
+    <table class="ledger-table reveal">
+      <tr><td class="cat">Partnership strategy</td><td>Designing partnership and liquidity strategy from market analysis through signed agreement, including credit and distribution structures with banks, payment providers, and platforms.</td></tr>
+      <tr><td class="cat">Deal sourcing &amp; negotiation</td><td>Independently identifying gaps in distribution or liquidity, then sourcing, negotiating, and closing multi stakeholder agreements without a pre built pipeline.</td></tr>
+      <tr><td class="cat">Cross functional delivery</td><td>Coordinating Product, Engineering, Legal, and Compliance to take a partnership from signature to live integration.</td></tr>
+      <tr><td class="cat">DeFi &amp; stablecoin fluency</td><td>Practical understanding of DeFi protocols, stablecoin mechanics, and yield generation, developed through full time work in the space and personal interest dating to 2016.</td></tr>
+      <tr><td class="cat">Market intelligence</td><td>Tracking fintech, blockchain, and regulatory trends to refine partnership and go to market strategy in real time.</td></tr>
+      <tr><td class="cat">Team leadership</td><td>Building and mentoring distributed teams of up to 9 people across 4 time zones while owning delivery cadence.</td></tr>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="col"><span>Location</span>Seattle, WA, United States</div>
+      <div class="col"><span>Email</span><a href="mailto:carol.zuritaa@outlook.com">carol.zuritaa@outlook.com</a></div>
+      <div class="col"><span>Phone</span>+1 415 312 3762</div>
+      <div class="col"><span>Languages</span>English &amp; Spanish, fully fluent</div>
+      <div class="col"><span>Education</span>Global MBA, Macquarie University</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // build seamless ticker content twice for a continuous loop
+  const stats = [
+    "6+ INSTITUTIONAL PARTNERS LANDED",
+    "<b>$1.8M</b> DEAL VALUE CLOSED, FANDOM KOREA",
+    "<b>7%</b> COLD OUTREACH CLOSE RATE",
+    "<b>8,000</b> FOLLOWERS AT $1.87 CPA",
+    "<b>3,000 TO 10,000+</b> COMMUNITY GROWTH, 2 MONTHS",
+    "<b>80,000</b> VIEWERS, EXCLUSIVE EXECUTIVE INTERVIEW",
+    "DEFI FOCUS SINCE 2016",
+    "4 REGIONS, APAC / MENA / LATAM / US"
+  ];
+  const track = document.getElementById('tickerTrack');
+  const html = stats.map(s => `<span>${s}</span>`).join('');
+  track.innerHTML = html + html;
+
+  // scroll reveal
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  els.forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
